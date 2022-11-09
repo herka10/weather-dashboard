@@ -13,13 +13,17 @@ var form = document.querySelector('form')
 var input = document.getElementById('search-input')
 var ul = document.querySelector('.list-group')
 
+// fetch('https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=50eda01c6654e53ed26f9a15174442c6')
+
 function renderCity(city) {
-    fetch('https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={50eda01c6654e53ed26f9a15174442c6}')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=50eda01c6654e53ed26f9a15174442c6')
+
+   
         .then(function(response) {
             return response.json()
         })
         .then(function(json) {
-            console.log(json)
+            console.log(json.wind.speed)
 
             // for (var i = 0; i < json.length; i++) {
             //     var listOfCities = json[i]
@@ -49,6 +53,7 @@ function renderWeather(city) {
 function handleSubmit(event) {
     event.preventDefault()
     var city = input.value
+    console.log(city)
     renderCity(city)
     renderWeather(city)
 }
